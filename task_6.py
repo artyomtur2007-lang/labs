@@ -1,10 +1,5 @@
-inp = input("Введите список элементов через пробел: ")
-lst = inp.split()
-unique = []
-
-for elem in lst:
-    if elem not in unique:
-        unique.append(elem)
-
-print("Список без дубликатов:", unique)
-
+pres=int(input('Введите давление(в Паскалях)'))
+vol=int(input('Введите объём(в м^3)'))
+temp=int(input('Введите температуру(в Кельвинах)'))
+amount=(pres*vol)/(8.31*temp)
+print('Количество вещества:',amount)
