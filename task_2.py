@@ -1,8 +1,4 @@
-str= input("Введите строку: ")
-newstr= ""
-glas= "aeiouAEIOU"
-for i in str:
-    if i not in glas:
-        newstr = newstr + i
-print("Строка без гласных:", newstr)
+str = input("Введите строку: ")
+new_str = str.replace('a', '').replace('e', '').replace('i', '').replace('o', '').replace('u', '').replace('A', '').replace('E', '').replace('I', '').replace('O', '').replace('U', '')
+print('Строка без гласных',new_str)
 

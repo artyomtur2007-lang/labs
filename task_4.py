@@ -17,9 +17,9 @@ amount = amount % 2
 
 ones = amount
 
-print("Hundreds:", hundreds)
-print("Fifties:", fifties)
-print("Tens:", tens)
-print("Fives:", fives)
-print("Twos:", twos)
-print("Ones:", ones)
+print(f" Hundreds: {hundreds}")
+print(f" Fifties: {fifties}")
+print(f" Tens: {tens}")
+print(f" Fives: {fives}")
+print(f" Twos: {twos}")
+print(f" Ones: {ones}")
