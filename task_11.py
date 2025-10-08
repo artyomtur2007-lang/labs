@@ -1,7 +1,9 @@
 day = int(input("Введите день рождения: "))
 month = int(input("Введите месяц рождения (числом): "))
 
-if (month == 1 and day >= 20) or (month == 2 and day <= 18):
+if (month == 12 and day >= 22) or (month == 1 and day <= 19):
+    print("Козерог")
+elif (month == 1 and day >= 20) or (month == 2 and day <= 18):
     print("Водолей")
 elif (month == 2 and day >= 19) or (month == 3 and day <= 20):
     print("Рыбы")
@@ -24,5 +26,5 @@ elif (month == 10 and day >= 23) or (month == 11 and day <= 21):
 elif (month == 11 and day >= 22) or (month == 12 and day <= 21):
     print("Стрелец")
 else:
-    print("Козерог")
+    print("Неверный ввод")
 

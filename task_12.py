@@ -20,8 +20,8 @@ if sms_used > sms_included:
     extra_sms_cost = extra_sms * 0.59
 
 if gb_used > gb_included:
-    extra_mb = (gb_used - gb_included) * 1024  # Convert GB to MB
-    extra_gb_cost = extra_mb * 0.79 / 1024  # Cost per GB again
+    extra_mb = (gb_used - gb_included) * 1024
+    extra_gb_cost = extra_mb * 0.79 / 1024
 
 total_extra_cost = extra_minutes_cost + extra_sms_cost + extra_gb_cost
 subtotal = base_cost + total_extra_cost
