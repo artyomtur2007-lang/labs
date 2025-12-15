@@ -27,6 +27,8 @@ def plot_top_airports(column, title, color):
     plt.ylabel("Количество рейсов")
     plt.tight_layout()
     plt.show()
+    most_popular=top.idxmax()
+    print(f"Самый популярный: {most_popular}")
 
 plot_top_airports('ORIG_CITY_CODE', "Топ-10 аэропортов отправления", 'skyblue')
 plot_top_airports('DEST_CITY_CODE', "Топ-10 аэропортов назначения", 'lightgreen')
@@ -45,6 +47,8 @@ if not monthly_sales.empty:
     plt.grid(True, alpha=0.3)
     plt.tight_layout()
     plt.show()
+    max_month = monthly_sales.idxmax()
+    print(f"Максимальная выручка была в {max_month[1]}.{max_month[0]}")
 else:
     print("Нет данных для сезонности по выручке")
 
@@ -62,6 +66,8 @@ if not monthly_flights.empty:
     plt.grid(True, alpha=0.3)
     plt.tight_layout()
     plt.show()
+    max_month_flights = monthly_flights.idxmax()
+    print(f"Больше всего перелётов было в {max_month_flights[1]}.{max_month_flights[0]}")
 else:
     print("Нет данных для сезонности по перелётам")
 
@@ -77,6 +83,8 @@ if 'PAX_TYPE' in df.columns and df['PAX_TYPE'].notna().any():
     plt.grid(True, axis='y', alpha=0.3)
     plt.tight_layout()
     plt.show()
+    best_pax = pax_avg.idxmax()
+    print(f"Самый прибыльный тип:{best_pax}")
 else:
     print("Нет данных по типам пассажиров")
 
@@ -85,12 +93,16 @@ if 'FFP_FLAG' in df.columns:
     ffp_stats = df.groupby('FFP_FLAG')['REVENUE_AMOUNT'].mean()
     print("\nСредняя выручка по FFP статусу:")
     print(ffp_stats)
+    best_ffp = ffp_stats.idxmax()
+    print(f"Наибольшая средняя выручка у  {best_ffp}")
 
 # Способы оплаты
 df_clean = df.dropna(subset=['FOP_TYPE_CODE', 'REVENUE_AMOUNT'])
 fop_avg = df_clean.groupby('FOP_TYPE_CODE')['REVENUE_AMOUNT'].mean().sort_values()
 print("\nСредняя сумма покупки по способам оплаты:")
 print(fop_avg)
+best_fop=fop_avg.idxmax()
+print(f"самый прибльный способ оплаты: {best_fop}")
 
 plt.bar(fop_avg.index.astype(str), fop_avg.values, color='mediumseagreen')
 plt.title("Сумма покупки по способу оплаты")
