@@ -13,9 +13,11 @@ print(f"Точек продаж: {df['точка'].nunique()}")
 
 df['Прибыль'] = df['продажи'] - df['себестоимость']
 df['Средняя_цена'] = df['продажи'] / df['количество']
+max_val=df.groupby('товар')['Прибыль'].sum().idxmax()
 
 print(f"\nОбщие продажи: {df['продажи'].sum():,.0f} руб")
 print(f"Общая прибыль: {df['Прибыль'].sum():,.0f} руб")
+print(f"самый прибыльный отвар: {max_val}")
 
 # продажи по месяцам
 print("\nПродажи по месяцам:")
@@ -28,12 +30,15 @@ plt.title('Продажи по месяцам')
 plt.xticks(rotation=45)
 plt.grid(True)
 plt.show()
+max_month = monthly_sales.idxmax()
+print(f"максимальные продажи были в {max_month}")
 
 # продажи по товарам
 print("\nПродажи по товарам:")
 sales_by_product = df.groupby('товар')['продажи'].sum().sort_values(ascending=False)
 print(sales_by_product)
-
+best_product=sales_by_product.idxmax()
+print(f"Лидер по продажам: {best_product}")
 plt.figure(figsize=(10, 4))
 plt.bar(sales_by_product.index, sales_by_product.values)
 plt.title('Продажи по товарам')
@@ -44,7 +49,8 @@ plt.show()
 print("\n Продажи по точкам:")
 sales_by_point = df.groupby('точка')['продажи'].sum().sort_values(ascending=False)
 print(sales_by_point)
-
+best_point=sales_by_point.idxmax()
+print(f"мамая прибыльная точка: {best_point}")
 plt.figure(figsize=(8, 4))
 plt.bar(sales_by_point.index, sales_by_point.values, color='green')
 plt.title('Продажи по точкам')
