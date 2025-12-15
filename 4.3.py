@@ -105,7 +105,6 @@ plt.xlabel('Специальность')
 plt.ylabel('Количество студентов')
 plt.xticks(rotation=45, ha='right')
 
-# Добавляем значения на столбцы
 for bar in bars:
     height = bar.get_height()
     plt.text(bar.get_x() + bar.get_width()/2., height + 3,
@@ -122,6 +121,7 @@ plt.title('Распределение по формам обучения', fonts
 # 5. Средний общий балл по специальностям
 plt.subplot(2, 3, 5)
 specialty_scores = df.groupby('Специальность')['Общий_балл'].mean().sort_values(ascending=False)
+plt.ylim(specialty_scores.min() - 5, specialty_scores.max() + 5)
 plt.bar(specialty_scores.index, specialty_scores.values, color='lightblue')
 plt.title('Средний общий балл по специальностям', fontsize=12, fontweight='bold')
 plt.xlabel('Специальность')
@@ -140,33 +140,11 @@ plt.xticks(rotation=45, ha='right')
 plt.tight_layout()
 plt.show()
 
-# 7. Боксплот распределения баллов по специальностям (без seaborn)
-plt.figure(figsize=(12, 6))
-
-# Создаем boxplot вручную с помощью matplotlib
-specialties = df['Специальность'].unique()
-data_to_plot = []
-
-for specialty in specialties:
-    specialty_data = df[df['Специальность'] == specialty]['Общий_балл']
-    data_to_plot.append(specialty_data)
-
-plt.boxplot(data_to_plot, labels=specialties)
-plt.title('Распределение общего балла по специальностям', fontsize=12, fontweight='bold')
-plt.xticks(rotation=45, ha='right')
-plt.ylabel('Общий балл')
-plt.grid(True, alpha=0.3)
-plt.tight_layout()
-plt.show()
-
-# 8. Тепловая карта корреляции предметов (без seaborn)
+# 7. Тепловая карта корреляции предметов
 plt.figure(figsize=(10, 8))
 correlation_matrix = df[subjs].corr()
-
-# Создаем тепловую карту с помощью imshow
 plt.imshow(correlation_matrix, cmap='coolwarm', aspect='auto', vmin=-1, vmax=1)
 
-# Добавляем значения в ячейки
 for i in range(len(correlation_matrix)):
     for j in range(len(correlation_matrix)):
         plt.text(j, i, f'{correlation_matrix.iloc[i, j]:.2f}',
@@ -178,8 +156,6 @@ plt.yticks(range(len(subjs)), subjs)
 plt.title('Корреляция баллов по предметам ЦТ', fontsize=12, fontweight='bold')
 plt.tight_layout()
 plt.show()
-
-# СТАТИСТИКА
 
 print("\n" + "="*60)
 print("СТАТИСТИЧЕСКАЯ ИНФОРМАЦИЯ")
@@ -212,8 +188,6 @@ print(f"\n Распределение по регионам:")
 for i, (region, count) in enumerate(df['Регион'].value_counts().head(3).items(), 1):
     percentage = (count / len(df)) * 100
     print(f"  {i}. {region}: {count} студентов ({percentage:.1f}%)")
-
-# СВОДНАЯ ТАБЛИЦА
 
 print("\n" + "="*60)
 print("СВОДНАЯ СТАТИСТИКА ПО ГОДАМ")
